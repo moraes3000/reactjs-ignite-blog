@@ -3,6 +3,7 @@ import Header from '../components/Header';
 
 import { getPrismicClient, } from '../services/prismic';
 import Prismic from '@prismicio/client'
+import { RichText } from 'prismic-dom'
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
@@ -28,22 +29,25 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
-export default function Home() {
+export default function Home({ postsItem }) {
   // TODO
   return (
     <>
       <Header />
 
-      <section className={styles.postContainer}>
-        <Link href='/'>
-          <a>
-            <h1>Como Utilizar hooks</h1>
-            <h2>Pensando em sincronização em vez de ciclos de vida.</h2>
+      {postsItem.map(post => (
+        <section className={styles.postContainer} key={post.title}>
+          <Link href='/'>
+            <a>
+              <h1>{post.title}</h1>
+              <h2>{post.excerpt}</h2>
 
-            <small><span><FiCalendar />15 Mar 2021</span> <FiUser />Bruno Moraes</small>
-          </a>
-        </Link>
-      </section>
+              <small><span><FiCalendar />{post.updateAt}</span> <FiUser />{post.author}</small>
+            </a>
+          </Link>
+        </section>
+      ))}
+
 
     </>
   )
@@ -56,15 +60,32 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsResponse = await prismic.query([
     Prismic.Predicates.at('document.type', 'post')
   ], {
-    fetch: ['post.title'],
+    fetch: ['post.title', 'post.author', 'post.content'],
     pageSize: 2,
   });
   console.log(JSON.stringify(postsResponse, null, 2))
-  // TODO
+
+  const postsItem = postsResponse.results.map(post => {
+    return {
+      post: post.uid,
+      // title: post.data.title[0].text
+      title: RichText.asText(post.data.title),
+      slugs: post.slugs,
+      subtitle: RichText.asText(post.data.content),
+      author: RichText.asText(post.data.author),
+      excerpt: post.data.content.find(content => content.type == 'paragraph')?.text ?? 'vazio',
+      updateAt: new Date(post.first_publication_date).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      })
+
+    }
+  })
 
   return {
     props: {
-
+      postsItem
     }
   }
 };
