@@ -1,1 +1,19 @@
-// TODO
+.postContainer {
+  h1{
+    margin-bottom: 8px;
+  }
+
+  h2{
+    margin-bottom:25px;
+  }
+  margin-bottom: 3rem;
+
+  small{
+    display: flex;
+    align-items: center;
+
+    span{
+      margin-right:2rem ;
+    }
+  }
+}
