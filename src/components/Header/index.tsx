@@ -3,7 +3,7 @@ export default function Header() {
   return (
     <>
       <header className={styles.headerContainer}>
-        <h1>aaaaa</h1>
+        <h1>&lt;/&gt; <span>spacetraveling</span>.</h1>
       </header>
     </>
   )
