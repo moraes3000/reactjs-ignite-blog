@@ -33,11 +33,9 @@ export default function Home({ postsItem }) {
   // TODO
   return (
     <>
-      <Header />
-
       {postsItem.map(post => (
         <section className={styles.postContainer} key={post.title}>
-          <Link href='/'>
+          <Link href={`/post/${post.slugs}`}>
             <a>
               <h1>{post.title}</h1>
               <h2>{post.excerpt}</h2>
@@ -47,8 +45,6 @@ export default function Home({ postsItem }) {
           </Link>
         </section>
       ))}
-
-
     </>
   )
 
