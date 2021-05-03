@@ -1,1 +1,50 @@
 // TODO
+.banner {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.postContainer {
+  h1 {
+    margin: 3rem 0;
+  }
+
+  article{
+    h2{
+      margin-bottom: 1.5rem;
+    }
+    ul {
+      margin-left: 3rem;
+      margin-bottom: 1.5rem;
+      li{
+        margin-bottom: 0.875rem;
+      }
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+    a{
+      color:var(--highlight);
+    }
+    span {
+      font-style: italic;
+      font-size: 0.875rem;
+      color:var(--info)
+    }
+  }
+
+}
+.postTop {
+  ul {
+    li {
+      list-style: none;
+      display: inline-block;
+      align-items: center;
+      margin-right: 1rem;
+    }
+  }
+  margin-bottom: 2rem;
+}
+
+
