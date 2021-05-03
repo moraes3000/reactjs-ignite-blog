@@ -82,26 +82,31 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
 
   return (
     <>
-    <Header />
-      {posts.map(post => (
-        <section className={styles.postContainer} key={post.uid}>
-          <Link href={`/post/${post.uid}`}>
-            <a>
-              <h1>{post.data.title}</h1>
-              <h2>{post.data.subtitle}</h2>
+      <Header />
+      <main className={commonStyles.commonContainer}>
+        {posts.map(post => (
+          <section className={styles.postContainer} key={post.uid}>
+            <Link href={`/post/${post.uid}`}>
+              <a>
+                <h1>{post.data.title}</h1>
+                <h2>{post.data.subtitle}</h2>
+                <small>
+                  <ul>
+                    <li><FiCalendar /> {post.first_publication_date}</li>
+                    <li><FiUser /> {post.data.author}</li>
+                  </ul>
+                </small>
+              </a>
+            </Link>
+          </section>
+        ))}
 
-              <small><span>{post.first_publication_date}<FiCalendar /></span> <FiUser />{post.data.author}</small>
-            </a>
-          </Link>
-        </section>
-      ))}
 
+        {nextPage && (
+          <button type='button' onClick={handleNextPage} className={styles.btn}>Carregar mais posts</button>
+        )}
 
-      {nextPage && (
-        <button type='button' onClick={handleNextPage}>Carregar mais posts</button>
-      )}
-
-
+      </main>
     </>
   )
 
