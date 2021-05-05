@@ -83,7 +83,7 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
   return (
     <>
       <Header />
-      <main className={commonStyles.commonContainer}>
+      {/* <main className={commonStyles.commonContainer}>
         {posts.map(post => (
           <section className={styles.postContainer} key={post.uid}>
             <Link href={`/post/${post.uid}`}>
@@ -106,7 +106,8 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
           <button type='button' onClick={handleNextPage} className={styles.btn}>Carregar mais posts</button>
         )}
 
-      </main>
+      </main> */}
+      <h1>teste</h1>
     </>
   )
 
